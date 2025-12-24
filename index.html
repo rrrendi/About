@@ -563,14 +563,190 @@
             margin-top: 30px;
         }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #fff;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 40px; }
-            .section-title { font-size: 36px; }
-            .hero-content, .grid, .grid-3, .contact-grid { grid-template-columns: 1fr; }
-            nav ul { gap: 20px; font-size: 14px; }
-            .cube-container { width: 250px; height: 250px; }
-            .cube-face { width: 125px; height: 125px; }
+        @media (max-width: 968px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            nav .container {
+                padding: 0 20px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: right 0.5s;
+                backdrop-filter: blur(20px);
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav ul li {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: all 0.3s;
+            }
+
+            nav ul.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            nav ul.active li:nth-child(1) { transition-delay: 0.1s; }
+            nav ul.active li:nth-child(2) { transition-delay: 0.2s; }
+            nav ul.active li:nth-child(3) { transition-delay: 0.3s; }
+            nav ul.active li:nth-child(4) { transition-delay: 0.4s; }
+            nav ul.active li:nth-child(5) { transition-delay: 0.5s; }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+                min-height: auto;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .cube-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .cube-face {
+                width: 125px;
+                height: 125px;
+                font-size: 40px;
+            }
+
+            .section-title {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+
+            .grid,
+            .grid-3,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .card h3 {
+                font-size: 22px;
+            }
+
+            .contact-bar {
+                padding: 40px 20px;
+            }
+
+            .contact-item h4 {
+                font-size: 36px;
+            }
+
+            .skill-header {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .badge {
+                font-size: 11px;
+                padding: 8px 20px;
+            }
+
+            .cube-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .cube-face {
+                width: 90px;
+                height: 90px;
+                font-size: 30px;
+            }
         }
     </style>
 </head>
@@ -593,12 +769,17 @@
     <nav id="nav">
         <div class="container">
             <div class="logo">LMRGS</div>
-            <ul>
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#experience">EXPERIENCE</a></li>
-                <li><a href="#skills">SKILLS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#home" class="nav-link">HOME</a></li>
+                <li><a href="#about" class="nav-link">ABOUT</a></li>
+                <li><a href="#experience" class="nav-link">EXPERIENCE</a></li>
+                <li><a href="#skills" class="nav-link">SKILLS</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
             </ul>
         </div>
     </nav>
@@ -808,6 +989,32 @@
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
             }
         });
     </script>
