@@ -876,4 +876,351 @@
                 margin-bottom: 30px;
             }
 
-            .section-title::after { width: 80px; bottom: -
+            .section-title::after { width: 80px; bottom: -10px; }
+
+            .grid, .grid-3, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .card { padding: 20px; }
+            .card h3 { font-size: 20px; }
+            .card .date { font-size: 11px; }
+            .card li { font-size: 14px; padding: 8px 0; padding-left: 20px; }
+
+            .contact-bar { padding: 30px 15px; }
+            .contact-item { padding: 20px 15px; }
+            .contact-item h4 { font-size: 32px; margin-bottom: 10px; }
+            .contact-item p { font-size: 10px; }
+            .contact-item strong { font-size: 14px; }
+
+            .skill { margin-bottom: 25px; }
+            .skill-header { font-size: 14px; margin-bottom: 10px; }
+            .skill-bar { height: 10px; }
+
+            footer { padding: 40px 15px; }
+            .social-link { padding: 12px 30px; font-size: 12px; }
+            footer p { font-size: 12px; }
+
+            .planet-1, .planet-2 { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 26px; }
+            .hero p { font-size: 14px; }
+            .section-title { font-size: 24px; }
+            .badge { font-size: 9px; padding: 6px 12px; }
+
+            .satellite {
+                width: 160px;
+                height: 160px;
+            }
+
+            .satellite-core {
+                width: 60px;
+                height: 60px;
+            }
+
+            .satellite-ring {
+                width: 130px;
+                height: 130px;
+            }
+
+            .satellite-ring:nth-child(2) {
+                width: 100px;
+                height: 100px;
+            }
+
+            .satellite-ring:nth-child(3) {
+                width: 70px;
+                height: 70px;
+            }
+
+            .card h3 { font-size: 18px; }
+            .card li { font-size: 13px; }
+            .contact-item h4 { font-size: 28px; }
+            .skill-header { font-size: 13px; }
+            nav a { font-size: 14px; }
+            .btn { font-size: 12px; padding: 12px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Space Background -->
+    <div class="space-bg"></div>
+    <div class="nebula"></div>
+    <div class="stars" id="stars"></div>
+    
+    <!-- Planets -->
+    <div class="planet planet-1"></div>
+    <div class="planet planet-2"></div>
+
+    <script>
+        // Generate Stars
+        const starsContainer = document.getElementById('stars');
+        for(let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Generate Shooting Stars
+        setInterval(() => {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.left = Math.random() * 100 + '%';
+            shootingStar.style.top = Math.random() * 50 + '%';
+            document.body.appendChild(shootingStar);
+            
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 3000);
+        }, 3000);
+    </script>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="container">
+            <div class="logo">◈ LMRGS ◈</div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#home" class="nav-link">HOME</a></li>
+                <li><a href="#about" class="nav-link">ABOUT</a></li>
+                <li><a href="#experience" class="nav-link">EXPERIENCE</a></li>
+                <li><a href="#skills" class="nav-link">SKILLS</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="badge">⦿ QUALITY ASSURANCE (IT) ⦿</span>
+                    <h1>
+                        LAODE MUHAMMAD
+                        <span class="gradient-text">RENDI GUMILAR</span>
+                        <span class="gradient-text">SAPUTRA</span>
+                    </h1>
+                    <p>Lulusan SMK MARHAS jurusan Rekayasa Perangkat Lunak. Mahasiswa D3 Teknik Informatika di STMIK Mardira Indonesia. Passionate about PHP, Laravel & Quality Assurance.</p>
+                    <div class="btn-group">
+                        <a href="#contact" class="btn btn-primary">HIRE ME</a>
+                        <a href="#experience" class="btn btn-secondary">VIEW WORK</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="satellite">
+                        <div class="satellite-ring"></div>
+                        <div class="satellite-ring"></div>
+                        <div class="satellite-ring"></div>
+                        <div class="satellite-core"></div>
+                        <div class="orbit-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Bar -->
+    <div class="contact-bar" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4>📱</h4>
+                    <p>PHONE</p>
+                    <strong>+62 821 1999 2162</strong>
+                </div>
+                <div class="contact-item">
+                    <h4>📧</h4>
+                    <p>EMAIL</p>
+                    <strong>rrendi6923@gmail.com</strong>
+                </div>
+                <div class="contact-item">
+                    <h4>📍</h4>
+                    <p>LOCATION</p>
+                    <strong>Bandung, Indonesia</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">⟡ PENDIDIKAN ⟡</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>STMIK Mardira Indonesia</h3>
+                    <p class="date">2023 - SEKARANG</p>
+                    <p>Program Studi Diploma 3 - Teknik Informatika</p>
+                </div>
+                <div class="card">
+                    <h3>SMK MARHAS</h3>
+                    <p class="date">2021</p>
+                    <p>Jurusan Rekayasa Perangkat Lunak</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title">⟡ PENGALAMAN ⟡</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>PKL - PT LEN</h3>
+                    <p class="date">NOVEMBER 2020 - JANUARI 2021</p>
+                    <ul>
+                        <li>Memimpin tim PKL (4 anggota)</li>
+                        <li>Membagi tugas dan mengarahkan anggota</li>
+                        <li>Menyusun laporan PKL komprehensif</li>
+                        <li>Mengelola timeline proyek</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>PANITIA WEBINAR</h3>
+                    <p class="date">JANUARI 2024</p>
+                    <ul>
+                        <li>Webinar Android Studio</li>
+                        <li>Kolaborasi dengan tim panitia</li>
+                        <li>Mengatur logistik & administrasi</li>
+                        <li>Akurasi tinggi dalam eksekusi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title">⟡ KEMAMPUAN ⟡</h2>
+            <div class="grid">
+                <div>
+                    <div class="skill">
+                        <div class="skill-header">
+                            <span class="skill-name">PHP & Laravel</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-header">
+                            <span class="skill-name">Software Perkantoran</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-header">
+                            <span class="skill-name">Hardware PC/Laptop</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="skill">
+                        <div class="skill-header">
+                            <span class="skill-name">Mengetik Cepat (50+ WPM)</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-header">
+                            <span class="skill-name">Manajemen Jadwal</span>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">⟡ SERTIFIKASI ⟡</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>HARDWARE KOMPUTER</h3>
+                    <p class="date">2021</p>
+                </div>
+                <div class="card">
+                    <h3>PKL PT. LEN</h3>
+                    <p class="date">2021</p>
+                </div>
+                <div class="card">
+                    <h3>ADMIN TOKO ONLINE</h3>
+                    <p class="date">2022</p>
+                </div>
+                <div class="card">
+                    <h3>CYBER SECURITY</h3>
+                    <p class="date">2025</p>
+                </div>
+                <div class="card">
+                    <h3>PKL PT. INTI</h3>
+                    <p class="date">2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="https://linktr.ee/lmrendigs" target="_blank" class="social-link">◈ CONNECT WITH ME ◈</a>
+            <p>© 2025 LAODE MUHAMMAD RENDI GUMILAR SAPUTRA | SPACE EDITION</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
